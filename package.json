@@ -1,0 +1,25 @@
+{
+  "name": "react-svg-text",
+  "version": "0.0.1",
+  "description": "React component for self-wrapping SVG text",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:reactiviz/react-svg-text.git"
+  },
+  "keywords": [
+    "React",
+    "SVG",
+    "text",
+    "wrap"
+  ],
+  "author": "Eric S. Bullington",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reactiviz/react-svg-text/issues"
+  },
+  "homepage": "https://github.com/reactiviz/react-svg-text"
+}
