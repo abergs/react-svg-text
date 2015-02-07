@@ -2,7 +2,7 @@
   "name": "react-svg-text",
   "version": "0.0.1",
   "description": "React component for self-wrapping SVG text",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,5 +21,55 @@
   "bugs": {
     "url": "https://github.com/reactiviz/react-svg-text/issues"
   },
-  "homepage": "https://github.com/reactiviz/react-svg-text"
+  "homepage": "https://github.com/reactiviz/react-svg-text",
+  "devDependencies": {
+    "browserify": "~6.3.3",
+    "chai": "^1.10.0",
+    "express": "^4.10.4",
+    "karma": "^0.12.28",
+    "karma-browserify": "^1.0.0",
+    "karma-chai": "^0.1.0",
+    "karma-chai-plugins": "^0.2.3",
+    "karma-mocha": "^0.1.9",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "mocha": "^2.0.1",
+    "nodemon": "^1.2.1",
+    "reactify": "^1.0.0",
+    "uglifyjs": "^2.3.6",
+    "watchify": "^2.1.1"
+  },
+  "dependencies": {
+    "react": "^0.12.2"
+  },
+  "scripts": {
+    "env": "env",
+    "watch": "watchify -o dist/public/js/main.js docs/examples/main.js --extension='.jsx' & nodemon server.js",
+    "build": "mkdir -p ./build/cjs && cp *.md ./build/cjs && cp .npmignore ./build/cjs && node scripts/build.js && jsx -x jsx -x js ./src ./build/cjs",
+    "clean": "rm -f ./build/cjs/*.js",
+    "lint": "jsxhint src/* tests/* || true",
+    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+  },
+  "jshintConfig": {
+    "browserify": true,
+    "expr": true,
+    "esnext": true,
+    "globals": {
+      "describe": false,
+      "it": false,
+      "before": false,
+      "beforeEach": false,
+      "after": false,
+      "afterEach": false
+    }
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
+  }
 }

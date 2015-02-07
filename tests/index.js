@@ -1,0 +1,2 @@
+
+require('./svg-text-tests');
