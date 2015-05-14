@@ -1,17 +1,20 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var React = require('react');
 
 module.exports = React.createClass({
+  displayName: 'exports',
 
-  getInitialState() {
+  getInitialState: function getInitialState() {
     return {
       lineHeight: 0,
       segments: []
     };
   },
 
-  componentDidMount() {
+  componentDidMount: function componentDidMount() {
     var height;
     var tspan = React.DOM.tspan;
     var words = this.props.children.split(' ');
@@ -28,7 +31,7 @@ module.exports = React.createClass({
       if (tempString.length === 0) {
         tempString = newWord;
       } else {
-        tempString = `${tempString} ${newWord}`;
+        tempString = '' + tempString + ' ' + newWord;
       }
       var tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
       var t = document.createTextNode(tempString);
@@ -55,45 +58,48 @@ module.exports = React.createClass({
       this.setState({
         segments: segments,
         lineHeight: height
-      })
+      });
     }
   },
 
-  _renderTSpan() {
+  _renderTSpan: function _renderTSpan() {
     var state = this.state;
     var props = this.props;
     if (this.state.segments.length === 0) {
-      return <tspan></tspan>;
+      return React.createElement('tspan', null);
     }
-    var newSegments = this.state.segments.map((segment, idx)=> {
-      return (
-        <tspan
-          x="10"
-          dy={state.lineHeight}
-          key={idx} 
-        >
-        {segment}
-        </tspan>
+    var newSegments = this.state.segments.map(function (segment, idx) {
+      return React.createElement(
+        'tspan',
+        {
+          x: '10',
+          dy: state.lineHeight,
+          key: idx
+        },
+        segment
       );
     });
-    return (
-      <text y="10" ref="textNode" {...props} >
-        {newSegments}
-      </text>
+    return React.createElement(
+      'text',
+      _extends({ y: '10', ref: 'textNode' }, props),
+      newSegments
     );
   },
 
-
-  render() {
-    return (
-        <g>
-          <g ref="hiddenGroupNode" style={{display:"none"}}>
-            <text ref="hiddenTextNode"></text>
-          </g>
-          <g style={{display:"inline"}}>
-            {this._renderTSpan()}
-          </g>
-        </g>
+  render: function render() {
+    return React.createElement(
+      'g',
+      null,
+      React.createElement(
+        'g',
+        { ref: 'hiddenGroupNode', style: { display: 'none' } },
+        React.createElement('text', { ref: 'hiddenTextNode' })
+      ),
+      React.createElement(
+        'g',
+        { style: { display: 'inline' } },
+        this._renderTSpan()
+      )
     );
   }
 
